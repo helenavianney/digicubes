@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Detail Produk - Digicubes Indonesia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container py-5" id="product-detail">
+  <!-- Detail produk akan dimuat dengan JavaScript -->
+</div>
+
+<script>
+  // Simulasi data produk (sama dengan yang di halaman utama)
+  const products = {
+    'digital-marketing': {
+      'title': 'E-Course Digital Marketing',
+      'image': 'img/teknik sadis digital marketing.jpeg',
+      'description': 'Kursus Digital Marketing yang mengajarkan teknik-teknik pemasaran digital terkini.',
+      'price': 'Rp 15,000'
+    },
+    'content-creator': {
+      'title': 'E-Course Content Creator',
+      'image': 'img/jurus jitu content creator.jpeg',
+      'description': 'Kursus Content Creator yang berfokus pada pembuatan konten kreatif.',
+      'price': '<del class="text-danger">Rp 149,000</del> Rp 99,000'
+    }
+  };
+
+  // Mendapatkan parameter "course" dari URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseKey = urlParams.get('course') || 'digital-marketing';
+  const product = products[courseKey];
+
+  // Fungsi untuk menampilkan detail produk
+  function displayProductDetail(product) {
+    return `
+      <div class="row">
+        <!-- Gambar Produk -->
+        <div class="col-md-6">
+          <img src="${product.image}" alt="${product.title}" class="img-fluid rounded">
+        </div>
+        <!-- Detail Produk -->
+        <div class="col-md-6">
+          <h1 class="fw-bold">${product.title}</h1>
+          <p class="lead">${product.description}</p>
+          <p class="text-success h4">${product.price}</p>
+          <a href="register.html?course=${courseKey}" class="btn btn-success btn-lg">Daftar Sekarang</a>
+        </div>
+      </div>
+    `;
+  }
+
+  // Menampilkan detail produk ke halaman
+  const productDetailContainer = document.getElementById('product-detail');
+  productDetailContainer.innerHTML = displayProductDetail(product);
+
+  // Mengubah judul halaman
+  document.getElementById('page-title').textContent = product.title + ' - Digicubes Indonesia';
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
