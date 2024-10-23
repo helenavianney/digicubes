@@ -202,15 +202,10 @@
 
 
   <section class="bg-body-tertiary" id="ecourse">
-    <div class="container mx-auto row py-5 justify-content-around">
-      <div class="card service-card" style="width: 18rem;">
-        <img src="img/teknik sadis digital marketing.jpeg" class="card-img-top pt-2" alt="digital marketing">
-        <div class="card-body">
-          <h5 class="card-title">E-Course Digital Marketing</h5>
-          <p class="card-text">Rp 15,000</p>
-          <a href="detail_produk.php?course=digital-marketing" class="btn btn-outline-success">Lihat Detail</a>
-        </div>
-      </div>
+  <div class="container mx-auto row py-5 justify-content-around" id="product-cards">
+    <!-- Produk akan dimuat dengan JavaScript -->
+  </div>
+</section>
 
       <div class="card service-card" style="width: 18rem;">
         <img src="img/jurus jitu content creator.jpeg" class="card-img-top pt-2" alt="content creator">
@@ -370,6 +365,42 @@
           document.getElementById("timer").innerHTML = "Promo Berakhir";
         }
       }, 1000);
+        
+  // Simulasi data produk
+  const products = {
+    'digital-marketing': {
+      'title': 'E-Course Digital Marketing',
+      'image': 'img/teknik sadis digital marketing.jpeg',
+      'description': 'Kursus Digital Marketing yang mengajarkan teknik-teknik pemasaran digital terkini.',
+      'price': 'Rp 15,000'
+    },
+    'content-creator': {
+      'title': 'E-Course Content Creator',
+      'image': 'img/jurus jitu content creator.jpeg',
+      'description': 'Kursus Content Creator yang berfokus pada pembuatan konten kreatif.',
+      'price': '<del class="text-danger">Rp 149,000</del> Rp 99,000'
+    }
+  };
+
+  // Fungsi untuk membuat elemen kartu produk
+  function generateProductCard(productKey, product) {
+    return `
+      <div class="card service-card" style="width: 18rem;">
+        <img src="${product.image}" class="card-img-top pt-2" alt="${product.title}">
+        <div class="card-body">
+          <h5 class="card-title">${product.title}</h5>
+          <p class="card-text">${product.price}</p>
+          <a href="detail_produk.html?course=${productKey}" class="btn btn-outline-success">Lihat Detail</a>
+        </div>
+      </div>
+    `;
+  }
+
+  // Menambahkan kartu produk ke halaman
+  const productContainer = document.getElementById('product-cards');
+  for (let key in products) {
+    productContainer.innerHTML += generateProductCard(key, products[key]);
+  }
 
     });
     
