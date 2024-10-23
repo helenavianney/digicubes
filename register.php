@@ -1,26 +1,6 @@
 <?php
 include_once 'config.php';
 
-// Simulasi data produk
-$products = [
-    'digital-marketing' => [
-        'title' => 'E-Course Digital Marketing',
-        'image' => 'img/teknik sadis digital marketing.jpeg',
-        'description' => 'Kursus Digital Marketing yang mengajarkan teknik-teknik pemasaran digital terkini, mulai dari SEO, iklan online, hingga media sosial.',
-        'price' => 'Rp 15,000',
-    ],
-    'content-creator' => [
-        'title' => 'E-Course Content Creator',
-        'image' => 'img/jurus jitu content creator.jpeg',
-        'description' => 'Kursus Content Creator yang berfokus pada pembuatan konten kreatif, mulai dari fotografi, video editing, hingga manajemen media sosial.',
-        'price' => '<del class="text-danger">Rp 149,000</del> Rp 99,000',
-    ],
-];
-
-// Mendapatkan kursus yang dipilih dari URL
-$courseKey = isset($_GET['course']) ? $_GET['course'] : 'digital-marketing';
-$product = $products[$courseKey];
-
 // Menangani data form setelah submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
@@ -43,13 +23,13 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pendaftaran - <?php echo $product['title']; ?></title>
+    <title>Form Pendaftaran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="container py-5">
-    <h2 class="fw-bold text-center mb-5">Pendaftaran - <?php echo $product['title']; ?></h2>
+    <h2 class="fw-bold text-center mb-5">Pendaftaran</h2>
 
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -70,8 +50,12 @@ $conn->close();
                 </div>
 
                 <div class="mb-3">
-                    <label for="course" class="form-label">Kursus yang Dipilih</label>
-                    <input type="text" name="course" id="course" class="form-control" value="<?php echo $product['title']; ?>" readonly>
+                    <label for="course" class="form-label">E-Course</label>
+                    <select name="ecourse" id="ecourse" class="form-control" required>
+                        <option value="">Pilih Kursus</option>
+                        <option value="content-creator">Jurus Jitu Content Creator</option>
+                        <option value="digital-marketing">Teknik Sadis Jualan Laris ala Digital Marketing</option>
+                    </select>
                 </div>
 
                 <button type="submit" class="btn btn-success btn-lg w-100">Daftar Sekarang</button>
